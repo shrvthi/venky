@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love for Chittilu 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poetsen One', cursive;
+    }
+
+    body {
+      background-color: #ffe6f0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+    }
+
+    .envelope {
+      width: 220px;
+      height: 150px;
+      background-color: #ff85a2;
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .envelope::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 110px solid transparent;
+      border-right: 110px solid transparent;
+      border-bottom: 50px solid #ff85a2;
+    }
+
+    .envelope-text {
+      color: white;
+      z-index: 2;
+      font-size: 18px;
+    }
+
+    .message {
+      display: none;
+      font-size: 26px;
+      color: #d6336c;
+      margin-top: 20px;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: url('https://emojicdn.elk.sh/❤️') no-repeat center/contain;
+      animation: floatHearts 5s infinite;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        bottom: 0;
+        opacity: 1;
+      }
+      100% {
+        bottom: 100%;
+        transform: translateX(-30px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="envelope" id="envelope">
+    <div class="envelope-text" id="envelopeText">Click here to open 💌</div>
+  </div>
+
+  <div class="message" id="message1">I miss you Chittilluuuuuu 😭🥺💋</div>
+  <div class="message" id="message2">Sending you lots of kisses back, I love you Chitti 💋</div>
+
+  <div class="hearts" id="heartsContainer"></div>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const envelopeText = document.getElementById('envelopeText');
+    const message1 = document.getElementById('message1');
+    const message2 = document.getElementById('message2');
+    const heartsContainer = document.getElementById('heartsContainer');
+
+    let stage = 1;
+
+    function createHearts() {
+      for (let i = 0; i < 40; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+        heartsContainer.appendChild(heart);
+      }
+    }
+
+    envelope.addEventListener('click', () => {
+      if (stage === 1) {
+        envelope.style.display = 'none';
+        message1.style.display = 'block';
+        createHearts();
+
+        setTimeout(() => {
+          message1.style.display = 'none';
+          envelope.style.display = 'flex';
+          envelopeText.textContent = 'Click here to give me a kissy 😘';
+          stage = 2;
+        }, 3000);
+      } else if (stage === 2) {
+        envelope.style.display = 'none';
+        message2.style.display = 'block';
+        createHearts();
+      }
+    });
+  </script>
+
+</body>
+</html>
